@@ -1,15 +1,16 @@
-# schemas.py
+# backend/schemas.py
 
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, EmailStr
+from typing import Optional, List
 
 
-# Used to validate incoming POST request for creating a new link
+# -----------------------------
+# Link Schemas
+# -----------------------------
 class LinkCreate(BaseModel):
     url: str
 
 
-# Used to format the API response when returning a link
 class LinkResponse(BaseModel):
     id: int
     url: str
@@ -17,13 +18,40 @@ class LinkResponse(BaseModel):
     image_url: Optional[str] = None
     domain: Optional[str] = None
 
-
-
     class Config:
-            orm_mode = True  # allows compatibility with SQLAlchemy models
+        from_attributes = True  # Pydantic v2: use attributes from ORM models
+
 
 class LinkUpdate(BaseModel):
     url: Optional[str] = None
     title: Optional[str] = None
     image_url: Optional[str] = None
     domain: Optional[str] = None
+
+
+# -----------------------------
+# User Schemas
+# -----------------------------
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class UserResponse(BaseModel):
+    id: int
+    email: EmailStr
+
+    class Config:
+        from_attributes = True
+
+
+# -----------------------------
+# Auth Token Schemas
+# -----------------------------
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    sub: Optional[str] = None
