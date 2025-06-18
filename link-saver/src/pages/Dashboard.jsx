@@ -1,5 +1,6 @@
 import Navbar from "./Navbar";
 import { useNavigate } from 'react-router-dom';
+import api from "../api/client";
 
 
 export default function DashboardPage(){
@@ -10,15 +11,19 @@ export default function DashboardPage(){
     navigate('/saved-links');
   };
 
-        const handleSubmit = (e) => {
+        const handleSubmit = async e => {
         e.preventDefault();
         const url = e.target.url.value.trim(); 
-        if (url) {
-            console.log("URL saved:", url);
-            
-            e.target.reset();
-        } else {
-            alert("Please enter a valid URL.");
+        if(!url) return alert("Please enter a valid URL");
+
+        try{
+            const resp = await api.post("/links/", { url });
+            console.log("Link saved successfully:", resp.data);
+            e.target.reset(); // Clear the input field after submission
+        }
+        catch (error) {
+            console.error("Error saving link:", error);
+            alert("Failed to save link. Please try again.");
         }
     };
 
@@ -41,6 +46,7 @@ export default function DashboardPage(){
                         type="url"
                         className="w-full p-2 border border-gray-300 rounded mb-4"
                         placeholder="Enter your URL here"></input>
+
                     <button type="submit" 
                      
                     className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-200">

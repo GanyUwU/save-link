@@ -8,7 +8,7 @@ from .. import models, schemas
 from ..database import get_db
 from .auth import get_current_user  # updated import path
 
-router = APIRouter(prefix="/links", tags=["Links"])
+router = APIRouter( tags=["Links"])
 
 @router.post("/", response_model=schemas.LinkResponse)
 def create_link(
