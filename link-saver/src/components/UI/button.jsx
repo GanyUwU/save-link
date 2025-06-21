@@ -75,10 +75,14 @@ export function Button({ children, type = 'button', onClick, className = '', dis
         variantStyles = 'bg-transparent text-gray-400 hover:text-white hover:bg-white/10';
     } else if (variant === 'outline') {
         variantStyles = 'bg-transparent border border-white/30 text-white hover:bg-white hover:text-black';
+<<<<<<< HEAD
     } else if (variant === 'primary') {
         variantStyles = 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500';
     }
     else {
+=======
+    } else {
+>>>>>>> 6579b39b7ca9963ba7ae4d8c6f9e824dd8d4c06e
         // Default variant
         variantStyles = 'bg-white text-black hover:bg-gray-200';
     }
