@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Eye, EyeOff, Link2, Mail, Lock, User, ArrowLeft} from 'lucide-react';
+import { Eye, EyeOff, Link2, Mail, Lock, User } from 'lucide-react';
 import { Button } from '../components/UI/button';
 import { Input } from '../components/UI/input';
 import { Card } from '../components/UI/card';
@@ -9,14 +9,12 @@ import { ThemeContext } from '../context/ThemeContext';
 import { ThemeToggle } from '../components/UI/theme';
 import api from "../api/client";
 
-
 export default function LoginPage({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLogin, setIsLogin] = useState(true); 
   const navigate = useNavigate();
   const { dark } = useContext(ThemeContext); 
 
@@ -36,11 +34,11 @@ export default function LoginPage({ onLogin }) {
 
       const token = response.data.access_token;
       localStorage.setItem("token", token);
-      
+
       if (onLogin) onLogin();
       navigate("/dashboard");
     } catch (err) {
-      console.error("Login error:", err); 
+      console.error("Login error:", err);
       setError(err.response?.data?.detail || "Invalid email or password.");
     } finally {
       setIsLoading(false);
@@ -48,40 +46,31 @@ export default function LoginPage({ onLogin }) {
   };
 
   return (
-    <div
-      className={`min-h-screen flex items-center justify-center p-4 relative font-sans ${
-        dark 
-          ? 'bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#2b2b2b]'
-          : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
-      }`}
-    >
-      
+    <div className={`min-h-screen flex items-center justify-center p-4 relative font-sans ${
+      dark
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black relative overflow-hidden bg-gradient-to-tr from-white/5 via-transparent to-gray-300/10'
+        : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
+    }`}>
       <div className="absolute inset-0 overflow-hidden">
         <div className={`absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-20 blur-3xl animate-pulse ${
           dark ? 'bg-gray-700' : 'bg-blue-400'
         }`}></div>
         <div className={`absolute -bottom-40 -left-40 w-80 h-80 rounded-full opacity-20 blur-3xl animate-pulse ${
           dark ? 'bg-gray-600' : 'bg-indigo-400'
-        }`} style={{animationDelay: '2s'}}></div>
+        }`} style={{ animationDelay: '2s' }}></div>
         <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full opacity-10 blur-3xl animate-pulse ${
-          dark ? 'bg-white' : 'bg-purple-400'
-        }`} style={{animationDelay: '4s'}}></div>
+          dark ? 'bg-gray-800' : 'bg-purple-400'
+        }`} style={{ animationDelay: '4s' }}></div>
       </div>
 
-     
-      <div
-        className="absolute top-4 right-4 z-10"
-      >
+      <div className="absolute top-4 right-4 z-10">
         <ThemeToggle />
       </div>
 
       <div className="relative z-10 w-full max-w-md">
-        {/* Logo Section */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <div className={`p-3 rounded-full ${
-              dark ? 'bg-white/10 backdrop-blur-sm' : 'bg-blue-500/20'
-            }`}>
+            <div className={`p-3 rounded-full ${dark ? 'bg-white/10 backdrop-blur-sm' : 'bg-blue-500/20'}`}>
               <Link2 className={`w-8 h-8 ${dark ? 'text-white' : 'text-blue-700'}`} />
             </div>
           </div>
@@ -89,33 +78,28 @@ export default function LoginPage({ onLogin }) {
             Link<span className={`${dark ? 'text-gray-300' : 'text-gray-600'}`}>ify</span>
           </h1>
           <p className={`${dark ? 'text-gray-300' : 'text-gray-600'} mt-2`}>
-            {isLogin ? 'Welcome back!' : 'Create your account'}
+            Sign in to access your links
           </p>
         </div>
 
-    
         <Card className={`p-8 backdrop-blur-lg border-0 shadow-2xl ${
-          dark 
-            ? 'bg-[#1a1a1a]/90 shadow-black/40'
+          dark
+            ? 'bg-gray/90 shadow-black/40'
             : 'bg-white/80 shadow-blue-500/20'
-        }`}>{/* Card Header Content */}
+        }`}>
           <div className="text-center mb-8">
             <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
-              dark 
+              dark
                 ? 'bg-gradient-to-r from-gray-700 to-gray-600'
                 : 'bg-gradient-to-r from-blue-500 to-indigo-500'
             }`}>
               <User className="text-white" size={24} />
             </div>
-            <h2 className={`text-3xl font-bold mb-2 ${
-              dark ? 'text-white' : 'text-gray-800'
-            }`}>
+            <h2 className={`text-3xl font-bold mb-2 ${dark ? 'from-gray-900' : 'text-gray-800'}`}>
               Welcome Back
             </h2>
-            <p className={`text-sm ${
-              dark ? 'text-gray-300' : 'text-gray-600'
-            }`}>
-              Sign in to your account to continue
+            <p className={`text-sm ${dark ? 'from-gray-900' : 'text-gray-600'}`}>
+              Enter your credentials to continue
             </p>
           </div>
 
@@ -125,10 +109,8 @@ export default function LoginPage({ onLogin }) {
             </div>
           )}
 
-          {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-4">
-              {/* Email Input */}
               <div className="relative">
                 <Label htmlFor="email" className={`block text-sm font-medium mb-2 ${
                   dark ? 'text-gray-200' : 'text-gray-700'
@@ -136,7 +118,7 @@ export default function LoginPage({ onLogin }) {
                   Email Address
                 </Label>
                 <div className="relative">
-                  <Mail className={`absolute w-full left-3 top-1/2 transform -translate-y-1/2 ${
+                  <Mail className={`absolute left-3 top-1/2 transform -translate-y-1/2 ${
                     dark ? 'text-gray-400' : 'text-gray-500'
                   }`} size={18} />
                   <Input
@@ -145,8 +127,8 @@ export default function LoginPage({ onLogin }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className={`pl-10 w-80 h-12 rounded-lg border-2 transition-all duration-200 ${
-                      dark 
+                    className={`pl-10 w-85 h-12 rounded-lg border-2 transition-all duration-200 ${
+                      dark
                         ? 'bg-[#2e2e2e] border-gray-600 text-white placeholder:text-gray-400 focus:border-gray-400 focus:ring-2 focus:ring-gray-400/40'
                         : 'bg-white/90 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 focus:bg-white'
                     } backdrop-blur-sm`}
@@ -155,7 +137,6 @@ export default function LoginPage({ onLogin }) {
                 </div>
               </div>
 
-              {/* Password Input */}
               <div className="relative">
                 <Label htmlFor="password" className={`block text-sm font-medium mb-2 ${
                   dark ? 'text-gray-200' : 'text-gray-700'
@@ -172,7 +153,7 @@ export default function LoginPage({ onLogin }) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className={`pl-10 text-md pr-10 w-70 h-12 rounded-lg border-2 transition-all duration-200 ${
+                    className={`pl-10 pr-10 w-75 h-12 rounded-lg border-2 transition-all duration-200 ${
                       dark
                         ? 'bg-[#2e2e2e] border-gray-600 text-white placeholder:text-gray-400 focus:border-gray-400 focus:ring-2 focus:ring-gray-400/40'
                         : 'bg-white/90 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 focus:bg-white'
@@ -182,7 +163,7 @@ export default function LoginPage({ onLogin }) {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className={`absolute right-1 top-1/2 transform -translate-y-1/2 ${
+                    className={`absolute right-3 top-1/2 transform -translate-y-1/2 ${
                       dark ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-700'
                     } transition-colors`}
                   >
@@ -192,13 +173,13 @@ export default function LoginPage({ onLogin }) {
               </div>
             </div>
 
-           
             <Button
               type="submit"
-              className={`w-full h-12 text-white font-medium rounded-lg transition-all duration-200 ${
-                dark 
-                  ? 'bg-gradient-to-r from-[#444] to-[#222] hover:from-[#555] hover:to-[#333] shadow-md shadow-black/40 hover:shadow-black/50'
-                  : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40'
+             
+             className={`w-95 h-12 text-gray-800 font-medium text-xl rounded-lg transition-all duration-200 ${
+                dark
+                  ? "bg-gradient-to-r from-[#444] to-[#222] hover:from-[#555] hover:to-[#333] shadow-md shadow-black/40 hover:shadow-black/50"
+                  : "bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 shadow-lg shadow-green-500/25 hover:shadow-green-500/40"
               } disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]`}
               disabled={isLoading}
             >
@@ -213,18 +194,13 @@ export default function LoginPage({ onLogin }) {
             </Button>
           </form>
 
-          
           <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-            <p className={`text-sm text-center ${
-              dark ? 'text-gray-400' : 'text-gray-600'
-            }`}>
-              Don't have an account?{" "}
+            <p className={`text-sm text-center ${dark ? 'text-blue-900' : 'text-gray-600'}`}>
+              Don’t have an account?{" "}
               <Link
                 to="/register"
                 className={`font-medium transition-colors ${
-                  dark
-                    ? 'text-gray-300 hover:text-white'
-                    : 'text-blue-600 hover:text-blue-500'
+                  dark ? 'text-gray-900 hover:text-white' : 'text-blue-600 hover:text-blue-500'
                 } hover:underline`}
               >
                 Create one now
@@ -236,4 +212,3 @@ export default function LoginPage({ onLogin }) {
     </div>
   );
 }
-
