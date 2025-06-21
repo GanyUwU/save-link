@@ -1,6 +1,7 @@
 # models.py
 
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, func
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, func,Text
+from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import relationship
 from .database import Base
 
@@ -26,7 +27,11 @@ class Link(Base):
     title      = Column(String, nullable=True)
     image_url  = Column(String, nullable=True)
     domain     = Column(String, nullable=True)
+    description= Column(Text,   nullable=True)
+    tags       = Column(ARRAY(String), nullable=False, default=[])
+    summary = Column(Text, nullable=True)  # Use Text for potentially long summaries
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    
 
     # Back‑reference to the owning user
     owner = relationship("User", back_populates="links")

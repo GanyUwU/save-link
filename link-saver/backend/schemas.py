@@ -17,6 +17,9 @@ class LinkResponse(BaseModel):
     title: Optional[str] = None
     image_url: Optional[str] = None
     domain: Optional[str] = None
+    summary: Optional[str] = None
+    description:str | None
+    tags:    List[str]= [] 
 
     class Config:
         from_attributes = True  # Pydantic v2: use attributes from ORM models
@@ -27,6 +30,8 @@ class LinkUpdate(BaseModel):
     title: Optional[str] = None
     image_url: Optional[str] = None
     domain: Optional[str] = None
+    summary: Optional[str]     = None
+    tags: Optional[List[str]]  = None 
 
 
 # -----------------------------

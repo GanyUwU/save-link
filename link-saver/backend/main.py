@@ -2,9 +2,10 @@
 
 from fastapi import FastAPI
 from . import models                # import the models so Base knows them
-from .database import engine, Base # engine connects to Postgres, Base is your model base class
 from .routers import links,auth  
 from fastapi.middleware.cors import CORSMiddleware 
+from backend.database import Base, engine
+from .routers.simple_parser import router as simple_parser_router
 
 
 
@@ -24,12 +25,18 @@ app.add_middleware(
 )
 
 # 1. Create tables in Postgres (ONLY needed once per new DB or schema change)
+# Step 2: Recreate it from models
+
 Base.metadata.create_all(bind=engine)
+
 
 # 3. 
 # Register your router under /links
-app.include_router(links.router, prefix="/links", tags=["Links"])
+app.include_router(links.router, tags=["Links"])
 app.include_router(auth.router, prefix="/auth", tags=["Auth"]) 
+#app.include_router(parser.router, prefix="/utils", tags=["Parser"])
+app.include_router(simple_parser_router, prefix="/utils", tags=["SimpleParser"])
+
 
 # 4. Health check route (test it in browser or Postman)
 @app.get("/")

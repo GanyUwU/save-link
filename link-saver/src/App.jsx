@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/Dashboard';
 import SavedLinks from './pages/SavedLinks';
 import RegisterPage from './pages/Register';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
    const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,12 +21,8 @@ function App() {
   };
 
   return (
+    
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-100">
-        <header className="bg-blue-600 text-white p-4 text-center">
-          <h1 className="text-2xl font-bold">Link Saver</h1>
-        </header>
-      </div>
       <Routes>
           <Route
             path="/login"
@@ -51,7 +48,7 @@ function App() {
           />
         </Routes>
     </BrowserRouter>
-    
+  
   );
 }
 
