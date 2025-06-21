@@ -46,10 +46,10 @@ pip install -r requirements.txt
 ```
   ### Set up environment variables
 ```bash
-DATABASE_URL=postgresql://postgres:admin@localhost:5432/link_saver
-SECRET_KEY =MySecretUnknownKey
-ALGORITHM =HS256
-GEMINI_API_KEY=AIzaSyA-xzJ5TBHto0AQzI0Pd95QCKOvIA_Ax_I
+DATABASE_URL=[YOUR DATABASE URL}
+SECRET_KEY ={JWT Secret}
+ALGORITHM =[Algorith-sha]
+GEMINI_API_KEY=[Your Gemini API key]
 ```
 
 
