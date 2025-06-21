@@ -1,14 +1,3 @@
-
-// src/components/ui/Input.jsx
-import React from 'react';
-
-/**
- * Input field with label above
- * Props:
- * - label: field label
- * - id: input id
- * - ...other input props
- */
 export function Input({ label, id, ...props }) {
   return (
     <div className="mb-4">

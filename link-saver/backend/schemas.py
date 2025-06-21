@@ -1,12 +1,8 @@
-# backend/schemas.py
 
 from pydantic import BaseModel, EmailStr
 from typing import Optional, List
 
 
-# -----------------------------
-# Link Schemas
-# -----------------------------
 class LinkCreate(BaseModel):
     url: str
 
@@ -22,7 +18,7 @@ class LinkResponse(BaseModel):
     tags:    List[str]= [] 
 
     class Config:
-        from_attributes = True  # Pydantic v2: use attributes from ORM models
+        from_attributes = True  
 
 
 class LinkUpdate(BaseModel):
@@ -34,9 +30,6 @@ class LinkUpdate(BaseModel):
     tags: Optional[List[str]]  = None 
 
 
-# -----------------------------
-# User Schemas
-# -----------------------------
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
@@ -50,9 +43,6 @@ class UserResponse(BaseModel):
         from_attributes = True
 
 
-# -----------------------------
-# Auth Token Schemas
-# -----------------------------
 class Token(BaseModel):
     access_token: str
     token_type: str

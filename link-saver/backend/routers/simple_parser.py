@@ -1,5 +1,3 @@
-# backend/routers/simple_parser.py
-
 from fastapi import APIRouter
 from pydantic import BaseModel, HttpUrl
 from bs4 import BeautifulSoup
@@ -68,18 +66,14 @@ def parse_simple(payload: SimpleParseRequest):
             except Exception as e:
                 print("Summary error:", e)
                 summary = None
-
-      
+                
         try:
             tags = categorize_content(f"{title}. {summary or ''}")
         except Exception as e:
             print("tags error:", e)
             tags = []
-
     except requests.RequestException:
-        
         pass
-
    
     return SimpleParseResponse(
         title=title,
@@ -87,5 +81,4 @@ def parse_simple(payload: SimpleParseRequest):
         image=image,
         domain=domain,
         summary=summary,
-        tags=tags
-    )
+        tags=tags )

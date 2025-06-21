@@ -1,5 +1,3 @@
-// src/pages/LoginPage.jsx
-// src/pages/LoginPage.jsx
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Eye, EyeOff, Link2, Mail, Lock, User, ArrowLeft} from 'lucide-react';
@@ -18,9 +16,9 @@ export default function LoginPage({ onLogin }) {
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLogin, setIsLogin] = useState(true); // State to toggle 'Welcome back!' / 'Create your account'
+  const [isLogin, setIsLogin] = useState(true); 
   const navigate = useNavigate();
-  const { dark } = useContext(ThemeContext); // Use ThemeContext for dark mode state
+  const { dark } = useContext(ThemeContext); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,13 +36,11 @@ export default function LoginPage({ onLogin }) {
 
       const token = response.data.access_token;
       localStorage.setItem("token", token);
-      // In a real app, you might set a default auth header for your API client like this:
-      // api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
+      
       if (onLogin) onLogin();
       navigate("/dashboard");
     } catch (err) {
-      console.error("Login error:", err); // Log the full error for debugging
+      console.error("Login error:", err); 
       setError(err.response?.data?.detail || "Invalid email or password.");
     } finally {
       setIsLoading(false);
@@ -54,12 +50,12 @@ export default function LoginPage({ onLogin }) {
   return (
     <div
       className={`min-h-screen flex items-center justify-center p-4 relative font-sans ${
-        dark // Conditional background based on dark mode
+        dark 
           ? 'bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#2b2b2b]'
           : 'bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50'
       }`}
     >
-      {/* Animated background shapes */}
+      
       <div className="absolute inset-0 overflow-hidden">
         <div className={`absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-20 blur-3xl animate-pulse ${
           dark ? 'bg-gray-700' : 'bg-blue-400'
@@ -72,7 +68,7 @@ export default function LoginPage({ onLogin }) {
         }`} style={{animationDelay: '4s'}}></div>
       </div>
 
-      {/* Theme Toggle Button */}
+     
       <div
         className="absolute top-4 right-4 z-10"
       >
@@ -97,16 +93,15 @@ export default function LoginPage({ onLogin }) {
           </p>
         </div>
 
-        {/* Login/Register Card */}
+    
         <Card className={`p-8 backdrop-blur-lg border-0 shadow-2xl ${
-          dark // Conditional card styling based on dark mode
+          dark 
             ? 'bg-[#1a1a1a]/90 shadow-black/40'
             : 'bg-white/80 shadow-blue-500/20'
-        }`}>
-          {/* Card Header Content */}
+        }`}>{/* Card Header Content */}
           <div className="text-center mb-8">
             <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
-              dark // Conditional icon circle background
+              dark 
                 ? 'bg-gradient-to-r from-gray-700 to-gray-600'
                 : 'bg-gradient-to-r from-blue-500 to-indigo-500'
             }`}>
@@ -124,7 +119,6 @@ export default function LoginPage({ onLogin }) {
             </p>
           </div>
 
-          {/* Error Message Display */}
           {error && (
             <div className="mb-6 p-3 rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800">
               <p className="text-red-600 dark:text-red-400 text-sm text-center">{error}</p>
@@ -152,7 +146,7 @@ export default function LoginPage({ onLogin }) {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
                     className={`pl-10 w-80 h-12 rounded-lg border-2 transition-all duration-200 ${
-                      dark // Conditional input styling
+                      dark 
                         ? 'bg-[#2e2e2e] border-gray-600 text-white placeholder:text-gray-400 focus:border-gray-400 focus:ring-2 focus:ring-gray-400/40'
                         : 'bg-white/90 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 focus:bg-white'
                     } backdrop-blur-sm`}
@@ -179,7 +173,7 @@ export default function LoginPage({ onLogin }) {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     className={`pl-10 text-md pr-10 w-70 h-12 rounded-lg border-2 transition-all duration-200 ${
-                      dark // Conditional input styling
+                      dark
                         ? 'bg-[#2e2e2e] border-gray-600 text-white placeholder:text-gray-400 focus:border-gray-400 focus:ring-2 focus:ring-gray-400/40'
                         : 'bg-white/90 border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 focus:bg-white'
                     } backdrop-blur-sm`}
@@ -198,11 +192,11 @@ export default function LoginPage({ onLogin }) {
               </div>
             </div>
 
-            {/* Sign In Button */}
+           
             <Button
               type="submit"
               className={`w-full h-12 text-white font-medium rounded-lg transition-all duration-200 ${
-                dark // Conditional button styling
+                dark 
                   ? 'bg-gradient-to-r from-[#444] to-[#222] hover:from-[#555] hover:to-[#333] shadow-md shadow-black/40 hover:shadow-black/50'
                   : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40'
               } disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]`}
@@ -219,7 +213,7 @@ export default function LoginPage({ onLogin }) {
             </Button>
           </form>
 
-          {/* Don't have an account link */}
+          
           <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
             <p className={`text-sm text-center ${
               dark ? 'text-gray-400' : 'text-gray-600'
@@ -243,72 +237,3 @@ export default function LoginPage({ onLogin }) {
   );
 }
 
-
-// // src/pages/LoginPage.jsx
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import api from "../api/client";
-
-// export default function LoginPage({ onLogin }) {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState(null);
-//   const navigate = useNavigate();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setError(null);
-//     try {
-//       // Prepare form-encoded data
-//       const formData = new URLSearchParams();
-//       formData.append("username", email);
-//       formData.append("password", password);
-
-//       const response = await api.post("/auth/token", formData, {
-//         headers: {
-//           "Content-Type": "application/x-www-form-urlencoded",
-//         },
-//       });
-
-//       // Store token and update app state
-//       const token = response.data.access_token;
-//       localStorage.setItem("token", token);
-//       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-//       onLogin();
-//       navigate("/dashboard");
-//     } catch (err) {
-//       console.error(err);
-//       setError("Invalid email or password.");
-//     }
-//   };
-
-//   return (
-//     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow">
-//       <h2 className="text-xl font-bold mb-4">Login</h2>
-//       {error && <div className="text-red-500 mb-2">{error}</div>}
-//       <form onSubmit={handleSubmit}>
-//         <label className="block mb-2 text-sm font-medium">Email</label>
-//         <input
-//           type="email"
-//           className="w-full p-2 mb-4 border rounded"
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
-//         <label className="block mb-2 text-sm font-medium">Password</label>
-//         <input
-//           type="password"
-//           className="w-full p-2 mb-4 border rounded"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-//         <button
-//           type="submit"
-//           className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-//         >
-//           Login
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }

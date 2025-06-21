@@ -1,5 +1,3 @@
-# models.py
-
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, func,Text
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import relationship
@@ -13,14 +11,13 @@ class User(Base):
     password_hash = Column(String, nullable=False)
     created_at    = Column(DateTime(timezone=True), server_default=func.now())
 
-    # One‑to‑many relationship: a user can have many links
+ 
     links = relationship("Link", back_populates="owner", cascade="all, delete-orphan")
     
 
 
 class Link(Base):
     __tablename__ = "links"
-
     id         = Column(Integer, primary_key=True, index=True)
     user_id    = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     url        = Column(String, nullable=False)
@@ -29,9 +26,9 @@ class Link(Base):
     domain     = Column(String, nullable=True)
     description= Column(Text,   nullable=True)
     tags       = Column(ARRAY(String), nullable=False, default=[])
-    summary = Column(Text, nullable=True)  # Use Text for potentially long summaries
+    summary = Column(Text, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     
 
-    # Back‑reference to the owning user
+   
     owner = relationship("User", back_populates="links")

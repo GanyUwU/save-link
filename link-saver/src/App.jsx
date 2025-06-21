@@ -9,13 +9,13 @@ import { ThemeProvider } from './context/ThemeContext';
 function App() {
    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // On mount, check if token exists
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
   }, []);
 
-  // Handler to update auth status after login
+
   const handleLogin = () => {
     setIsLoggedIn(true);
   };

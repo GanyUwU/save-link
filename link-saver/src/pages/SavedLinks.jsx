@@ -2,7 +2,6 @@
 import { useEffect, useState, useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import api from "../api/client";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../components/UI/navbar";
 import { Trash2 } from "lucide-react";
 
