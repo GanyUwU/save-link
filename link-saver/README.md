@@ -17,6 +17,10 @@ Linkify is a full-stack web app built with **FastAPI**, **React**, and **Postgre
 
 ---
 
+## Project Demo: SaveLink 
+[Click here to watch the demo](https://drive.google.com/file/d/1SMkhoLGnJiFCTCgG0joXXtplpYqlE2mr/view?usp=sharing)
+
+
 ## ⚙️ Tech Stack
 
 - **Backend**: FastAPI, PostgreSQL, SQLAlchemy, Pydantic
